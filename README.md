@@ -1,2 +1,2 @@
 # WikiScrapper
-How to win at Wikipedia_Race
+Yo tout le monde aujourd'hui on fait un scrapper pour tricher sur le jeu de Wikipedia
