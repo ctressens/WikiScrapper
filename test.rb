@@ -24,7 +24,7 @@ end
 wurz = Test::Wurz.new "Saucisse"			# => #<Test::Wurz:0x00000001601278>
 puts wurz.say_hello_to "David"				# => "Hello David, I'm Saucisse"
 
-puts "---------------------------------"
+puts "---------------------------------"	# => Bah c'est une ligne quoi. Y'a pas grand chose à dire dessus.
 
 spargel = Test2::Spargel.new "Asperge"		# => #<Test2::Spargel:0x000000012d32e0>
 puts spargel.say_hello_to "Jeannette"		# => "Hello Jeannette, I'm Asperge"
