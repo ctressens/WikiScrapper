@@ -2,8 +2,7 @@
 
 module Test
 	class Wurz
-		@@name = "Wurz"
-		def initialize name
+		def initialize name = "Wurz"
 			@@name = name
 		end
 
@@ -14,5 +13,5 @@ module Test
 
 end
 
-wurz = Test::Wurz.new 'Saucisse'		# => #<TakeBack::Wurz:0x00000001de95f8>
+wurz = Test::Wurz.new "Saucisse"		# => #<TakeBack::Wurz:0x00000001de95f8>
 puts wurz.say_hello_to "David"			# => "Hello David, i'm Saucisse"
