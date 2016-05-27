@@ -13,5 +13,5 @@ module Test
 
 end
 
-wurz = Test::Wurz.new "Saucisse"		# => #<TakeBack::Wurz:0x00000001de95f8>
+wurz = Test::Wurz.new "Saucisse"		# => #<Test::Wurz:0x00000001de95f8>
 puts wurz.say_hello_to "David"			# => "Hello David, i'm Saucisse"
