@@ -16,7 +16,7 @@ ruby WikiScrapper.rb
 ```
 Just paste your starting keyword (or starting URL) and paste your ending keyword. Let the script search for you.
 
-## III - Recommandations
+## III - Recommendations
 1. Use RVM to install Ruby.
 2. Have a great connection. It will run many HTTP requests.
-3. It can take a lot of RAM. Please do not try this on you Masterrace computer (Raspberry PI).
+3. It can take a lot of RAM. Please do not try this on your Masterrace computer (Raspberry PI).
