@@ -21,11 +21,11 @@ module Test2
 end
 
 
-wurz = Test::Wurz.new "Saucisse"		# => #<Test::Wurz:0x00000001de95f8>
-puts wurz.say_hello_to "David"			# => "Hello David, i'm Saucisse"
+wurz = Test::Wurz.new "Saucisse"			# => #<Test::Wurz:0x00000001601278>
+puts wurz.say_hello_to "David"				# => "Hello David, I'm Saucisse"
 
 puts "---------------------------------"
 
-spargel = Test2::Spargel.new "Asperge"
-puts spargel.say_hello_to "Jeannette"
-puts spargel.stinking_pee
+spargel = Test2::Spargel.new "Asperge"		# => #<Test2::Spargel:0x000000012d32e0>
+puts spargel.say_hello_to "Jeannette"		# => "Hello Jeannette, I'm Asperge"
+puts spargel.stinking_pee					# => "I'll make you do a stinking pee"
