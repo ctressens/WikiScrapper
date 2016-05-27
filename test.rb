@@ -10,7 +10,6 @@ module Test
 		def say_hello_to name
 			"Hello #{name}, i'm #{@@name}"
 		end
-
 	end
 
 end
