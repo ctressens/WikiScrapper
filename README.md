@@ -5,7 +5,7 @@ This is a script and it discover a path to win at the **Wikipedia_Race** challen
 ### How it works?
 Just give a first keyword (or its URL), and an end keyword, wait a second (or an hour, depending of your shitty computer), and it will show you the path from the starting keyword to the ending keyword.
 
-## II - Running?
+## II - Running
 ### Installing Ruby and dependencies
 This script uses **Ruby** *(2.3.0 recommended)*. We recommend to use *UNIX* or *GNU* OS. *Windows* and *Ruby* are not friends
 You just have to install the dependencies by running `bundle install`. If *bundle* is not recognized, run `(sudo) gem install bundler`, and restart `bundle install`.
