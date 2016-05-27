@@ -1,23 +1,23 @@
 #!/usr/bin/env ruby
 
 module Test
-	class Wurz
-		def initialize name = "Wurz"
-			@@name = name
-		end
+    class Wurz
+        def initialize name = "Wurz"
+            @@name = name
+        end
 
-		def say_hello_to name
-			"Hello #{name}, I'm #{@@name}"
-		end
-	end
+        def say_hello_to name
+            "Hello #{name}, I'm #{@@name}"
+        end
+    end
 end
 
 module Test2
-	class Spargel < Test::Wurz
-		def stinking_pee
-			"I'll make you do a stinking pee"
-		end
-	end
+    class Spargel < Test::Wurz
+        def stinking_pee
+            "I'll make you do a stinking pee"
+        end
+    end
 end
 
 
