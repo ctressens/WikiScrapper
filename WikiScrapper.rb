@@ -6,7 +6,7 @@ require 'open-uri'
 
 # ENTREES
 
-# Début
+# Input de l'URL de départ
 print "URL de départ : "
 starting_url = gets.chomp
 while starting_url[0, 8] != "https://"
@@ -14,7 +14,7 @@ while starting_url[0, 8] != "https://"
     starting_url = gets.chomp
 end
 
-# Fin
+# Inpute de l'URL de fin
 print "URL d'arrivée : "
 ending_url = gets.chomp
 while ending_url[0, 8] != "https://"
