@@ -1,11 +1,10 @@
 #!/usr/bin/env ruby
-
 require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 
-# ENTREES
 
+## INPUTS
 # Input de l'URL de départ
 print "URL de départ : "
 starting_url = gets.chomp
@@ -24,7 +23,7 @@ end
 
 
 
-# Début du script putain enfin quoi c'est long putain fait chier fdp enculé.
+## Début du script
 starting_doc = Nokogiri::HTML(open(starting_url))
 hrefs = Array.new
 
