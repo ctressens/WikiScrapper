@@ -3,8 +3,6 @@ require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 
-
-
 ## INPUTS
 # Input de l'URL de départ
 print "URL de départ : "
@@ -28,7 +26,7 @@ end
 starting_doc = Nokogiri::HTML(open(starting_url))
 hrefs = Array.new
 
-starting_doc.css('#mw-content-text p a').each do |a|
+starting_doc.css('#mw-content-text a').each do |a|
     href = a.attributes["href"].value
     if href[0, 6] == "/wiki/"
         href["/wiki/"] = ""
