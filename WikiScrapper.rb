@@ -5,13 +5,13 @@ require 'open-uri'
 require 'nokogiri'
 
 module WikiScrapper
-class Explorer
+    class Explorer
         def initialize starting, ending
             @starting = starting
             @ending = ending
 
-			@layers = Array.new
-			@links = Array.new
+            @layers = Array.new
+            @links = Array.new
 		end
 		def get_links url = @starting
 			doc = Nokogiri::HTML(open(url))
