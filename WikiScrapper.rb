@@ -4,6 +4,7 @@ require 'nokogiri'
 require 'open-uri'
 
 
+
 ## INPUTS
 # Input de l'URL de départ
 print "URL de départ : "
