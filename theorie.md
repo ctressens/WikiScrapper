@@ -24,11 +24,11 @@ etc.
 
 ## II - Stockage des données
 Deux options de stockage des données :
-1. Dans la RAM ;
-2. Dans un fichier.
+1. Dans la RAM
+2. Dans un fichier
 Deux inconvenients :
-1. Overuse la RAM ;
-2. Overuse le HDD/SSD.
+1. Overuse la RAM
+2. Overuse le HDD/SSD
 
 
 ## III - Output
