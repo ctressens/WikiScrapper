@@ -5,10 +5,10 @@ require 'open-uri'
 require 'nokogiri'
 
 module WikiScrapper
-	class Explorer
-		def initialize starting, ending
-			@starting = starting
-			@ending = ending
+class Explorer
+        def initialize starting, ending
+            @starting = starting
+            @ending = ending
 
 			@layers = Array.new
 			@links = Array.new
