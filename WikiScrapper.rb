@@ -23,15 +23,21 @@ end
 
 
 ## Début du script
-starting_doc = Nokogiri::HTML(open(starting_url))
-hrefs = Array.new
+def explorer
+	starting_doc = Nokogiri::HTML(open(starting_url))
+	hrefs = Array.new
 
-starting_doc.css('#mw-content-text a').each do |a|
-    href = a.attributes["href"].value
-    if href[0, 6] == "/wiki/"
-        href["/wiki/"] = ""
-        hrefs[hrefs.length] = href
-    end
+	starting_doc.css('#mw-content-text a').each do |a|
+		href = a.attributes["href"].value
+		if href[0, 6] == "/wiki/"
+			href["/wiki/"] = ""
+		else
+			next
+		end
+		if !hrefs.include? href
+			hrefs[hrefs.length] = href
+		end
+	end
 end
 
 p hrefs
