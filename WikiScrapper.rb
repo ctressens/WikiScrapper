@@ -9,18 +9,14 @@ module WikiScrapper
         def initialize starting, ending
             @starting = starting
             @ending = ending
-            @links = Array.new
         end
         def find_path
             get_links
-            puts "true" if @layer.include? format_url(@ending)
         end
 
         private
             def get_links url = @starting
                 doc = Nokogiri::HTML(open(url))
-                @layer = Array.new
-                # @layers[@layers.length] = Array.new     # => Will be `lay`
 
 
                 doc.css('#mw-content-text a').each do |a|
@@ -30,8 +26,6 @@ module WikiScrapper
                     else
                         next
                     end
-                    @layer[@layer.length] = href if !@layer.include? href
-                    @links[@links.length] = href if !@links.include? href
                 end
 
             end
@@ -44,5 +38,5 @@ module WikiScrapper
     end
 end
 
-explor = WikiScrapper::Explorer.new 'https://fr.wikipedia.org/wiki/Ruby', 'https://fr.wikipedia.org/wiki/Python_(langage)'
+explor = WikiScrapper::Explorer.new 'https://fr.wikipedia.org/wiki/Ruby', 'https://fr.wikipedia.org/wiki/Japonais'
 explor.find_path
