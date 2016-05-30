@@ -10,6 +10,8 @@ module  Wiki
         def initialize starting_url, ending_url
             @starting_url = starting_url
             @ending_url = ending_url
+
+            @layers = Array.new
         end
 
         def start_finding
@@ -18,6 +20,7 @@ module  Wiki
             else
                 puts "Ooops, there is a problem. Please copy/paste the URLs from Wikipedia."
             end
+            puts @layers
         end
 
         private
@@ -69,7 +72,8 @@ module  Wiki
                     end
 
                 end
-                puts list
+                # puts list
+                @layers[@layers.length] = list.sort
             end
     end
 
