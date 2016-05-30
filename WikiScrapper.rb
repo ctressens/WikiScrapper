@@ -28,6 +28,13 @@ module  Wiki
                     false
                 end
             end
+            def validate_uri uri
+                if /^\/wiki\/.+$/ =~ uri
+                    true
+                else
+                    false
+                end
+            end
 
             def format_url url
                 if validate_url url
@@ -36,10 +43,33 @@ module  Wiki
                     false
                 end
             end
+            def format_uri uri
+                if validate_uri uri
+                    uri.sub(/^\/wiki\//, '')
+                else
+                    false
+                end
+            end
+            def uri_or_url urall
+                if /^https:\/\/.+\..+/ =~ urall
+                    "url"
+                elsif /^\/wiki\/.+/ =~ urall
+                    "uri"
+                end
+            end
 
             def scan_page url
                 document = Nokogiri::HTML(open(url))
+                list = Array.new
+                document.css('#mw-content-text a').each do |a|
+                    href = a.attributes["href"].value
+                    if uri_or_url(href) == "uri"
+                        # p format_uri(href)
+                        list[list.length] = format_uri(href) if !list.include? format_uri(href)
+                    end
 
+                end
+                puts list
             end
     end
 
