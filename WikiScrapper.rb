@@ -11,17 +11,21 @@ module  Wiki
             @starting_url = starting_url
             @ending_url = ending_url
 
+            @scanned = Array.new
             @layers = Array.new
         end
 
         def start_finding
             if validate_url(@starting_url) && validate_url(@ending_url)
                 scan_page @starting_url
-                scan_page @ending_url
+                @layers.last.each do |a|
+                    scan_page @starting_url[0, 30] + a
+
+                end
             else
                 puts "Ooops, there is a problem. Please copy/paste the URLs from Wikipedia."
             end
-            return @layers
+            # return @layers
         end
 
         private
@@ -63,24 +67,27 @@ module  Wiki
             end
 
             def scan_page url
-                document = Nokogiri::HTML(open(url))
-                list = Array.new
-                document.css('#mw-content-text a').each do |a|
-                    href = a.attributes["href"].value
-                    if uri_or_url(href) == "uri"
-                        # p format_uri(href)
-                        list.push format_uri(href) if !list.include? format_uri(href)
+                if !@scanned.include? format_url(url)
+                    puts "Scanning #{url}..."
+                    document = Nokogiri::HTML(open(url))
+                    list = Array.new
+                    document.css('#mw-content-text a').each do |a|
+                        href = a.attributes["href"].value
+                        if uri_or_url(href) == "uri"
+                            # p format_uri(href)
+                            list.push format_uri(href) if !list.include? format_uri(href)
+                        end
                     end
+                    @scanned.push format_url(url)
+                    @layers.push list.sort
                 end
-                # puts list
-                @layers.push list.sort
             end
     end
 
 end
 
 pathfind = Wiki::PathFinder.new "https://fr.wikipedia.org/wiki/Ruby", "https://fr.wikipedia.org/wiki/Python_(langage)"
-pathfind.start_finding.each do |list|
-    puts "---------"
-    puts list
-end
+# pathfind.start_finding.each do |list|
+#     puts list
+# end
+pathfind.start_finding
