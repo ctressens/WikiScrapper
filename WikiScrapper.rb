@@ -1,3 +1,4 @@
+# encoding: utf-8
 #!/usr/bin/env ruby
 require 'rubygems'
 require 'uri'
@@ -17,10 +18,11 @@ module  Wiki
         def start_finding
             if validate_url(@starting_url) && validate_url(@ending_url)
                 scan_page @starting_url
+                scan_page @ending_url
             else
                 puts "Ooops, there is a problem. Please copy/paste the URLs from Wikipedia."
             end
-            puts @layers
+            return @layers
         end
 
         private
@@ -68,16 +70,19 @@ module  Wiki
                     href = a.attributes["href"].value
                     if uri_or_url(href) == "uri"
                         # p format_uri(href)
-                        list[list.length] = format_uri(href) if !list.include? format_uri(href)
+                        list.push format_uri(href) if !list.include? format_uri(href)
                     end
 
                 end
                 # puts list
-                @layers[@layers.length] = list.sort
+                @layers.push list.sort
             end
     end
 
 end
 
 pathfind = Wiki::PathFinder.new "https://fr.wikipedia.org/wiki/Ruby", "https://fr.wikipedia.org/wiki/Python_(langage)"
-pathfind.start_finding
+pathfind.start_finding.each do |list|
+    puts "---------"
+    puts list
+end
