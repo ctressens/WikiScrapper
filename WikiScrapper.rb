@@ -1,4 +1,3 @@
-# encoding: utf-8
 #!/usr/bin/env ruby
 require 'rubygems'
 require 'uri'
@@ -72,7 +71,6 @@ module  Wiki
                         # p format_uri(href)
                         list.push format_uri(href) if !list.include? format_uri(href)
                     end
-
                 end
                 # puts list
                 @layers.push list.sort
