@@ -19,13 +19,10 @@ module  Wiki
             if validate_url(@starting_url) && validate_url(@ending_url)
                 scan_page @starting_url
                 while !@layers.last.include? format_url(@ending_url)
-                    scan_page @starting_url[0, 30] + @layers.last.last
+                    @layers.last.each do |layer|
+                        scan_page @starting_url[0, 30] + layer
+                    end
                 end
-                # file = File.new('temp.txt', "w+")
-                # puts "OK"
-                # puts @layers.last.last
-                # p @layers
-
             else
                 puts "Ooops, there is a problem. Please copy/paste the URLs from Wikipedia."
             end
