@@ -8,7 +8,7 @@ Just give a first keyword (or its URL), and an end keyword, wait a second (or an
 ## II - Running
 ### Installing Ruby and dependencies
 This script uses **Ruby** *(2.3.0 recommended)*. We recommend to use *UNIX* or *GNU* OS. **Windows** and **Ruby** are not friends.
-You just have to install the dependencies by running `bundle install`. If *bundle* is not recognized, run `gem install bundler`, and restart `bundle install`.
+You just have to install the dependencies by running `bundle install` in the Git folder. If *bundle* is not recognized, run `gem install bundler`, and restart `bundle install`.
 ### Run the script
 Move into the directory and start
 ```
