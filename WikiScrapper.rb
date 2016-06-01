@@ -87,8 +87,13 @@ module  Wiki
                     end
                     @scanned.push format_url(url)
                     @layers.push list.sort
-                    puts "#{" " * (100 - url.length).to_i} done (#{time_diff(time, Time.now).ceil}ms)"
+                    puts "#{" " * (150 - url.length).to_i} done (#{time_diff(time, Time.now).ceil}ms)"
                     # puts "@layers.length = #{@layers.length}"
+
+                elsif url == @starting_url
+                    puts "Retour à la case départ !"
+                else
+                    puts "Encore un d'évité !"
                 end
             end
     end
