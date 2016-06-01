@@ -93,7 +93,7 @@ module  Wiki
                 elsif url == @starting_url
                     puts "Retour à la case départ !"
                 else
-                    puts "Encore un d'évité !"
+                    puts "Encore un d'évité ! (#{url} non scannée)"
                 end
             end
     end
