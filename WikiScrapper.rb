@@ -18,10 +18,14 @@ module  Wiki
         def start_finding
             if validate_url(@starting_url) && validate_url(@ending_url)
                 scan_page @starting_url
-                @layers.last.each do |a|
-                    scan_page @starting_url[0, 30] + a
-
+                while !@layers.last.include? format_url(@ending_url)
+                    scan_page @starting_url[0, 30] + @layers.last.last
                 end
+                # file = File.new('temp.txt', "w+")
+                # puts "OK"
+                # puts @layers.last.last
+                # p @layers
+
             else
                 puts "Ooops, there is a problem. Please copy/paste the URLs from Wikipedia."
             end
@@ -66,9 +70,15 @@ module  Wiki
                 end
             end
 
+            def time_diff start, finish
+                (finish - start) * 1000.0
+            end
+
             def scan_page url
                 if !@scanned.include? format_url(url)
-                    puts "Scanning #{url}..."
+                    time = Time.now
+                    print "Scanning: #{url}"
+                    # puts time.methods
                     document = Nokogiri::HTML(open(url))
                     list = Array.new
                     document.css('#mw-content-text a').each do |a|
@@ -80,14 +90,13 @@ module  Wiki
                     end
                     @scanned.push format_url(url)
                     @layers.push list.sort
+                    puts "#{" " * (100 - url.length).to_i} done (#{time_diff(time, Time.now).ceil}ms)"
+                    # puts "@layers.length = #{@layers.length}"
                 end
             end
     end
 
 end
 
-pathfind = Wiki::PathFinder.new "https://fr.wikipedia.org/wiki/Ruby", "https://fr.wikipedia.org/wiki/Python_(langage)"
-# pathfind.start_finding.each do |list|
-#     puts list
-# end
+pathfind = Wiki::PathFinder.new "https://fr.wikipedia.org/wiki/Ruby", "https://fr.wikipedia.org/wiki/Organisation_mondiale_du_commerce"
 pathfind.start_finding
