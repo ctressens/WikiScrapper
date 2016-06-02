@@ -16,7 +16,7 @@ module  Wiki
         end
 
         def start_finding
-            if validate_url(@starting_url) && validate_url(@ending_url)
+            if valid_url?(@starting_url) && valid_url?(@ending_url) && valid_url_couple?(@starting_url, @ending_url)
                 scan_page @starting_url
                 while !@layers.last.include? format_url(@ending_url)
                     @layers.last.each do |layer|
@@ -30,15 +30,33 @@ module  Wiki
         end
 
         private
-            def validate_url url
+            def valid_url? url
                 if /^https:\/\/[a-z]{2}.wikipedia.org\/wiki\/.+$/ =~ url
                     true
                 else
                     false
                 end
             end
-            def validate_uri uri
+            def valid_uri? uri
                 if /^\/wiki\/.+$/ =~ uri
+                    true
+                else
+                    false
+                end
+            end
+            def valid_url_couple? url1, url2
+                if url1[8, 2] === url2[8, 2]
+                    true
+                else
+                    false
+                end
+            end
+
+            def scan? url
+                if(/^.+#.+$/ =~ format_url(url))
+                    url = url.split('#')[0]
+                end
+                if !(/^.+:.+$/ =~ format_url(url)) and !@scanned.include? format_url(url)
                     true
                 else
                     false
@@ -46,14 +64,14 @@ module  Wiki
             end
 
             def format_url url
-                if validate_url url
+                if valid_url? url
                     url.sub(/^https:\/\/[a-z]{2}.wikipedia.org\/wiki\//, '')
                 else
                     false
                 end
             end
             def format_uri uri
-                if validate_uri uri
+                if valid_uri? uri
                     uri.sub(/^\/wiki\//, '')
                 else
                     false
@@ -72,23 +90,25 @@ module  Wiki
             end
 
             def scan_page url
-                if !@scanned.include? format_url(url)
+                if scan?(url)
+                    if(/^.+#.+$/ =~ format_url(url))
+                        url = url.split('#')[0]
+                    end
                     time = Time.now
                     print "Scanning: #{url}"
-                    # puts time.methods
                     document = Nokogiri::HTML(open(url))
                     list = Array.new
+
                     document.css('#mw-content-text a').each do |a|
                         href = a.attributes["href"].value
                         if uri_or_url(href) == "uri"
-                            # p format_uri(href)
                             list.push format_uri(href) if !list.include? format_uri(href)
                         end
                     end
                     @scanned.push format_url(url)
                     @layers.push list.sort
+
                     puts "#{" " * (150 - url.length).to_i} done (#{time_diff(time, Time.now).ceil}ms)"
-                    # puts "@layers.length = #{@layers.length}"
 
                 elsif url == @starting_url
                     puts "Retour à la case départ !"
@@ -97,8 +117,8 @@ module  Wiki
                 end
             end
     end
-
 end
 
 pathfind = Wiki::PathFinder.new "https://fr.wikipedia.org/wiki/Ruby", "https://fr.wikipedia.org/wiki/Organisation_mondiale_du_commerce"
 pathfind.start_finding
+ 
